@@ -10,7 +10,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // Get a user
+  // Get a single user
   async getSingleUser(req, res) {
     try {
       const user = await User.findOne({ _id: req.params.user_id })
@@ -42,7 +42,7 @@ module.exports = {
       if (!user) {
         res.status(404).json({ message: 'No user with that ID' });
       }
-      
+
       await Thought.deleteMany({ _id: { $in: user.thoughts } });
       await Reaction.deleteMany({ _id: { $in: thought.reactions } })
       res.json({ message: 'User and thoughts deleted!' });
