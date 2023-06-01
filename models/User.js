@@ -1,13 +1,13 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 // Schema to create new user
 const userSchema = new Schema(
   {
-    // user_id: {
-    //   type: Schema.Types.ObjectId,
-    //   default: () => new Types.ObjectId(),
-    // },
-    username: {
+    user_id: {
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId(),
+    },
+    name: {
       type: String,
       required: true,
       unique: true,
@@ -15,8 +15,11 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
-      required: true,
+      trim: true,
+      lowercase: true,
       unique: true,
+      required: true,
+      match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/]
     },
     thoughts: [
       {
