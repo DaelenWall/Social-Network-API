@@ -1,9 +1,9 @@
-const { Schema, Types } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 // Schema to create new thought
-const ThoughtSchema = new Schema(
+const thoughtSchema = new Schema(
     {
-        reaction_id: {
+        thought_id: {
             type: Schema.Types.ObjectId,
             default: () => new Types.ObjectId(),
           },
@@ -35,12 +35,12 @@ const ThoughtSchema = new Schema(
         },
         id: false
     }
-)
+);
 
-ThoughtSchema.virtual('reactionCount').get(function () {
+thoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
 });
 
-const Thought = model('Thought', ThoughtSchema)
+const Thought = model('Thought', thoughtSchema);
 
-module.exports = Thought
+module.exports = Thought;
