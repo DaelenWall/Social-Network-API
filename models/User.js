@@ -1,23 +1,22 @@
-const { Schema, model, Types } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 // Schema to create new user
 const userSchema = new Schema(
   {
-    user_id: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
-    },
-    name: {
+    // user_id: {
+    //   type: Schema.Types.ObjectId,
+    //   default: () => new Types.ObjectId(),
+    // },
+    username: {
       type: String,
       required: true,
+      unique: true,
+      trim: true,
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      validate: {
-        isEmail: true,
-      },
     },
     thoughts: [
       {
