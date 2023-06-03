@@ -6,6 +6,7 @@ const userSchema = new Schema(
     user_id: {
       type: Schema.Types.ObjectId,
       default: () => new Types.ObjectId(),
+      unique: true,
     },
     name: {
       type: String,

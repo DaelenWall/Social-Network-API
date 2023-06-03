@@ -5,7 +5,8 @@ const reactionSchema = new Schema(
     {
         reaction_id: {
             type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId()
+            default: () => new Types.ObjectId(),
+            unique: true,
         },
         reactionText: {
             type: String,

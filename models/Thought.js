@@ -6,6 +6,7 @@ const thoughtSchema = new Schema(
         thought_id: {
             type: Schema.Types.ObjectId,
             default: () => new Types.ObjectId(),
+            unique: true,
           },
         thoughtText: {
             type: String,
@@ -17,9 +18,9 @@ const thoughtSchema = new Schema(
             default: Date.now,
             required: true,
         },
-        username: {
+        name: {
             type: String,
-            required: true
+            required: true,
         },
         reactions: [
             {
