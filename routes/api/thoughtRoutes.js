@@ -7,6 +7,8 @@ const {
     deleteThought,
     addThoughtReaction,
     removeThoughtReaction,
+    getSingleThoughtReaction,
+    getAllThoughtReactions,
 } = require('../../controllers/thoughtController');
 
 // Route:  /api/thoughts - WORKS
@@ -22,9 +24,20 @@ router
     .delete(deleteThought);
 
 // Route:  /api/thoughts/:thought_id/reactions
-router.route('/:thought_id/reactions').post(addThoughtReaction);
+router.route('/:thought_id/reactions')
+.post(addThoughtReaction);
+
+// Route: /api/thoughts/:thought_id/reactions
+router.route('/:thought_id/reactions')
+.get(getAllThoughtReactions);
 
 // Route:  /api/thoughts/:thought_id/reactions/:reaction_id
-router.route('/:thought_id/reactions/:reaction_id').delete(removeThoughtReaction);
+router.route('/:thought_id/reactions/:reaction_id')
+.delete(removeThoughtReaction)
+.get(getSingleThoughtReaction);
+
 
 module.exports = router;
+
+
+// https://npkill.js.org/

@@ -94,10 +94,11 @@ module.exports = {
   // Add a reaction
   async addThoughtReaction(req, res) {
     try {
+      const reaction = await Reaction.create(req.body)
       const thought = await Thought.findOneAndUpdate(
-        { _id: req.params.thought_id },
-        { $addToSet: { reactions: req.body } },
-        { runValidators: true, new: true }
+        { _id: req.body.name },
+        { $addToSet: { reactions: reaction._id } },
+        { new: true }
       );
 
       if (!thought) {
@@ -123,6 +124,23 @@ module.exports = {
       }
 
       res.json(thought);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+  async getSingleThoughtReaction(req, res) {
+    try {
+      const thoughtReaction = await Reaction.findOne(req.body)
+      res.json(thoughtReaction);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+  // Get a single thought
+  async getAllThoughtReactions(req, res) {
+    try {
+      const thoughtReactions = await Reaction.find()
+      res.json(thoughtReactions);
     } catch (err) {
       res.status(500).json(err);
     }

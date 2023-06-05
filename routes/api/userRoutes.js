@@ -21,9 +21,4 @@ router
     .put(updateUser)
     .delete(deleteUser);
 
-// Route: /api/users/:user_id/friends/:friend_id - IN PROGRESS
-// router.route('/:user_id/friends/:friend_id')
-//     .post(addFriend)
-//     .delete(removeFriend);
-
 module.exports = router;
