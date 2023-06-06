@@ -29,7 +29,7 @@ module.exports = {
     try {
       const thought = await Thought.create(req.body);
       const user = await User.findOneAndUpdate(
-        { _id: req.body.name },
+        { _id: req.body.user_id },
         { $addToSet: { thoughts: thought._id } },
         { new: true }
       );
@@ -56,15 +56,13 @@ module.exports = {
       }
 
       const user = await User.findOneAndUpdate(
-        { thoughts: req.params.thought_id },
+        { thoughts: req.params.user_id },
         { $pull: { thoughts: req.params.thought_id } },
         { new: true }
       );
 
-      if (!thought) {
-        return res
-          .status(404)
-          .json({ message: 'Thought created but no user with this id!' });
+      if (!user) {
+        return res.status(404).json({ message: 'Thought deleted!' });
       }
 
       res.json({ message: 'Thought successfully deleted!' });
@@ -96,13 +94,16 @@ module.exports = {
     try {
       const reaction = await Reaction.create(req.body)
       const thought = await Thought.findOneAndUpdate(
-        { _id: req.body.name },
+        { _id: req.body.thought_id },
         { $addToSet: { reactions: reaction._id } },
         { new: true }
       );
 
       if (!thought) {
         return res.status(404).json({ message: 'No thought with this id!' });
+      }
+      if (!reaction) {
+        return res.status(404).json({ message: 'No reaction with this id!' });
       }
 
       res.json(thought);
@@ -113,14 +114,14 @@ module.exports = {
   // Remove a reaction
   async removeThoughtReaction(req, res) {
     try {
-      const thought = await Thought.findOneAndUpdate(
+      const thought = await Thought.findOneAndRemove(
         { _id: req.params.thought_id },
         { $pull: { reactions: { reaction_id: req.params.reaction_id } } },
         { runValidators: true, new: true }
       )
 
-      if (!thought) {
-        return res.status(404).json({ message: 'No thought with this id!' });
+      if (!thought || !user) {
+        return res.status(404).json({ message: 'Reaction deleted!' });
       }
 
       res.json(thought);

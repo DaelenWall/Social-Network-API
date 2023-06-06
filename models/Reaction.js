@@ -5,8 +5,11 @@ const reactionSchema = new Schema(
     {
         reaction_id: {
             type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId(),
             unique: true,
+        },
+        thought_id: {
+            type: String,
+            required: true
         },
         reactionText: {
             type: String,
@@ -15,12 +18,9 @@ const reactionSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now,
+            required: true,
         },
-        name: {
-            type: String,
-            required: true
-        },
+
 
     },
 );

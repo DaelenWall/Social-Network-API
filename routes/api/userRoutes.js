@@ -5,8 +5,6 @@ const {
     createUser,
     deleteUser,
     updateUser,
-    addFriend,
-    removeFriend,
 } = require('../../controllers/userController.js');
 
 // Route:  /api/users - WORKS

@@ -5,9 +5,12 @@ const thoughtSchema = new Schema(
     {
         thought_id: {
             type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId(),
             unique: true,
-          },
+        },
+        user_id: {
+            type: String,
+            required: true
+        },
         thoughtText: {
             type: String,
             required: true,
@@ -15,17 +18,13 @@ const thoughtSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now,
-            required: true,
-        },
-        name: {
-            type: String,
             required: true,
         },
         reactions: [
             {
-              type: Schema.Types.ObjectId,
-              ref: "Reaction",
+                type: Schema.Types.ObjectId,
+                unique: true,
+                ref: "Reaction",
             },
         ],
     },

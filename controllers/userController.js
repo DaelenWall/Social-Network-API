@@ -13,8 +13,7 @@ module.exports = {
   // Get a single user
   async getSingleUser(req, res) {
     try {
-      const user = await User.findOne({ _id: req.params.user_id })
-        .select('-__v');
+      const user = await User.findOne({ _id: req.params.user_id });
 
       if (!user) {
         return res.status(404).json({ message: 'No user with that ID' });
@@ -35,7 +34,7 @@ module.exports = {
       return res.status(500).json(err);
     }
   },
-  // Delete a user - may need to return as reactions to thoughts are not properly called
+  // Delete a user 
   async deleteUser(req, res) {
     try {
       const user = await User.findOneAndDelete({ _id: req.params.user_id })

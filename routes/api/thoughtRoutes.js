@@ -16,25 +16,22 @@ router.route('/')
     .get(getAllThoughts)
     .post(createThought);
 
-// Route:  /api/thoughts/:thought_id
+// Route:  /api/thoughts/:thought_id - WORKS
 router
     .route('/:thought_id')
     .get(getSingleThought)
     .put(updateThought)
     .delete(deleteThought);
 
-// Route:  /api/thoughts/:thought_id/reactions
+// Route:  /api/thoughts/:thought_id/reactions - WORKS
 router.route('/:thought_id/reactions')
-.post(addThoughtReaction);
-
-// Route: /api/thoughts/:thought_id/reactions
-router.route('/:thought_id/reactions')
-.get(getAllThoughtReactions);
+    .post(addThoughtReaction)
+    .get(getAllThoughtReactions);
 
 // Route:  /api/thoughts/:thought_id/reactions/:reaction_id
 router.route('/:thought_id/reactions/:reaction_id')
-.delete(removeThoughtReaction)
-.get(getSingleThoughtReaction);
+    .delete(removeThoughtReaction)
+    .get(getSingleThoughtReaction);
 
 
 module.exports = router;
